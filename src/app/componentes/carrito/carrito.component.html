@@ -1,0 +1,8 @@
+<mat-card>
+    <mat-list>
+        <mat-list-item *ngFor="let p of productos">
+            {{ p.id }} - {{p.color}} - {{p.cantidad}}
+            <mat-icon (click)="deleteItem()" class="danger"></mat-icon>
+        </mat-list-item>
+    </mat-list>
+</mat-card>

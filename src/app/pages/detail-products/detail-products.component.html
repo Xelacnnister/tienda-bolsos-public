@@ -1,0 +1,36 @@
+<h1> {{ producto?.nombre }} </h1>
+<!-- 10-->
+<h2>{{ producto?.precio }} </h2>
+
+<div *ngFor="let i of producto.img">
+    <img [ngClass]=" comprobarSiImgCoincideColor(i) ? 'border' : null" src="/assets/img/{{ i }}">
+</div>
+
+
+<div>
+    <mat-chip-list class="mat-chip-list-stacked" aria-label="Color selection">
+
+        <mat-chip (click)="seleccionoColor(chip)" *ngFor="let chip of producto.colores" selected class="{{ chip }}">
+        {{ chip | titlecase }}
+
+        </mat-chip>
+
+    </mat-chip-list>
+    <mat-form-field *ngIf="color" appearance="outline">
+        <mat-label>{{color | titlecase }}</mat-label>
+        <input onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" min="0" maxlength="9" type="number" [(ngModel)]="cantidad" matInput placeholder="Cantidad">
+        <mat-icon style="cursor: pointer" matSuffix class="{{ color }}-icon" (click)="add()">add_circle</mat-icon>
+        <mat-icon style="cursor: pointer" matPrefix class=" {{ color }}-icon" (click)="remove()">remove_circle</mat-icon>
+
+    </mat-form-field>
+</div>
+
+<div>
+    <app-carrito></app-carrito>
+</div>
+
+<button (click)="volver()">VOLVER</button>
+
+<button *ngIf="showAgregar" (click)="agregar()">AGREGAR</button>
+
+<button *ngIf="showPagar" (click)="pagar()">PAGAR</button>
